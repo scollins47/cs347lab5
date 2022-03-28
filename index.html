@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Storing Database</title>
+</head>
+<body>
+    <!-- Take input for username and password -->
+    <label for="username">Username:</label>
+    <input type="text" name="username" id="username">
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password">
+    <input type="submit" onclick="sendCreds()">
+    <button onclick="signup()"> Sign Up </button>
+</body>
+</html>
+<script>
+    function sendCreds(){
+        user = document.getElementById("username").value;
+        pw = document.getElementById("password").value;
+        fetch("/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: user,
+                password: pw
+            })
+        }).then(function(response){
+            if (response.status == 200){
+                localStorage.username = user;
+                localStorage.password = pw;
+                window.location.href = "/hello";
+            }
+            if (response.status == 201){
+                alert("Invalid username or password");
+                document.getElementById("username").value = "";
+                document.getElementById("password").value = "";
+            }
+            return response.json();
+        });
+    }
+    function signup(){
+        window.location.href = "/signup";
+    }
+</script>

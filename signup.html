@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="username" id="username">
+    <input type="password" name="password" id="password">
+    <input type="submit" onclick="sendCreds()">
+</body>
+
+</html>
+<script>
+    function sendCreds(){
+        user = document.getElementById("username").value;
+        pw = document.getElementById("password").value;
+        fetch("/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: user,
+                password: pw
+            })
+        }).then(function(response){
+            if (response.status == 201){
+                window.location.href='/hello';
+            }
+            if (response.status == 203){
+                alert("Username Taken!");
+                document.getElementById("username").value = "";
+                document.getElementById("password").value = "";
+            }
+            return response.json();
+        });
+    }
+</script>
