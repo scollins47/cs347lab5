@@ -1,4 +1,9 @@
 body {
+    display: flex;
+    height: 90vh;
+    width: 100%;
+    flex-wrap:wrap;
+    justify-content: center;
     background-color:slategray;
 }
 
@@ -23,21 +28,18 @@ body {
     border: 1px solid white;
 }
 
-h2 {
-    color:antiquewhite;
-    width: 50%;
-    margin: auto;
-}
-
-label {
-    color:antiquewhite;
-}
-
 #form {
     width: 100%;
-    display: flex;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid white;
+}
+
+input {
+
+}
+
+label {
+    color: seashell;
 }
