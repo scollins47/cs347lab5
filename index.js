@@ -3,7 +3,7 @@ const pg = require('pg');
 const http = require("http");
 const app = express();
 const port = 3000;
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 
 // brew services start postgres
